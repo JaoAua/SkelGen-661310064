@@ -1,7 +1,9 @@
 from PySide2 import QtCore, QtGui, QtWidgets
 from shiboken2 import wrapInstance
 import maya.OpenMayaUI as omui
+# from . import util 
 
+ROOT_RESOURCE_JOINT = "C:/Users/Theerada Kanokkaew/Documents/maya/2024/scripts"
 class SkelGenDialog(QtWidgets.QDialog):
 	def __init__(self, parent=None):
 		super().__init__(parent)
@@ -20,41 +22,42 @@ class SkelGenDialog(QtWidgets.QDialog):
 		)
 
 
-		self.buttonLayout = QtWidgets.QHBoxLayout()
-		self.mainLayout.addLayout(self.buttonLayout)
-		self.createGuidelineButton = QtWidgets.QPushButton('Create Guideline')
-		self.buttonLayout.addWidget(self.createGuidelineButton)					
-		self.createGuidelineButton.setStyleSheet('''
-			QPushButton{
-				background-color: #977DFF;
+		# self.buttonLayout = QtWidgets.QHBoxLayout()
+		# self.mainLayout.addLayout(self.buttonLayout)
+		# self.createGuidelineButton = QtWidgets.QPushButton('Create Guideline')
+		# #self.clearGuidelineButton.clicked.connect(onClickCreateGuideline)
+		# self.buttonLayout.addWidget(self.createGuidelineButton)					
+		# self.createGuidelineButton.setStyleSheet('''
+		# 	QPushButton{
+		# 		background-color: #977DFF;
 
-			}
-			QPushButton:hover {
-				background-color: #FFCCF2;
-			}
-			QPushButton:pressed {
-				background-color: #0600AB;
-			}
-			'''
-		)
+		# 	}
+		# 	QPushButton:hover {
+		# 		background-color: #FFCCF2;
+		# 	}
+		# 	QPushButton:pressed {
+		# 		background-color: #0600AB;
+		# 	}
+		# 	'''
+		# )
 
-		self.buttonLayout = QtWidgets.QHBoxLayout()
-		self.mainLayout.addLayout(self.buttonLayout)
-		self.clearGuidelineButton = QtWidgets.QPushButton('Clear Guideline')
-		self.buttonLayout.addWidget(self.clearGuidelineButton)
-		self.clearGuidelineButton.setStyleSheet('''
-			QPushButton{
-				background-color: #977DFF;
+		# self.buttonLayout = QtWidgets.QHBoxLayout()
+		# self.mainLayout.addLayout(self.buttonLayout)
+		# self.clearGuidelineButton = QtWidgets.QPushButton('Clear Guideline')
+		# self.buttonLayout.addWidget(self.clearGuidelineButton)
+		# self.clearGuidelineButton.setStyleSheet('''
+		# 	QPushButton{
+		# 		background-color: #977DFF;
 
-			}
-			QPushButton:hover {
-				background-color: #FFCCF2;
-			}
-			QPushButton:pressed {
-				background-color: #0600AB;
-			}
-			'''
-		)
+		# 	}
+		# 	QPushButton:hover {
+		# 		background-color: #FFCCF2;
+		# 	}
+		# 	QPushButton:pressed {
+		# 		background-color: #0600AB;
+		# 	}
+		# 	'''
+		# )
 
 		self.descriptionLabel = QtWidgets.QLabel('Before using Generate Joint')
 		self.mainLayout.addWidget(self.descriptionLabel)
@@ -106,6 +109,8 @@ class SkelGenDialog(QtWidgets.QDialog):
 		# self.buttonLayout.addWidget(self.cancelButton)
 
 		self.mainLayout.addStretch()
+
+	#def onClickCreateGuideline(self):
 
 def run():
 	global ui
