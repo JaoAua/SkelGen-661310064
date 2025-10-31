@@ -101,7 +101,10 @@ class SkelGenDialog(QtWidgets.QDialog):
 			cmds.warning(f"File not found: {FILE_PATH}")
 
 	def onClickMirror(self):
-		util.MirrorSelection()
+		mirror_tool = util.MirrorSelection()
+		mirror_tool.mirrorJoint()   # มิเรอร์ joint ทั้งหมดที่ขึ้นต้นด้วย L_
+
+		# mirror_tool.mirrorCurveControl() 
 
 
 def run():
