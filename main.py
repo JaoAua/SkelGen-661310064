@@ -1,15 +1,19 @@
 from PySide2 import QtCore, QtGui, QtWidgets
 from shiboken2 import wrapInstance
 import maya.OpenMayaUI as omui
-# from . import util 
+import os
+from . import util
+import importlib
+importlib.reload(util)
 
-ROOT_RESOURCE_JOINT = "C:/Users/Theerada Kanokkaew/Documents/maya/2024/scripts"
+FILE_PATH = "C:/Users/Theerada Kanokkaew/Documents/maya/2024/scripts/SkelGen_661310064/joint.ma"
+ROOT_RESOURCE_DIR = "C:/Users/Theerada Kanokkaew/Documents/maya/2024/scripts/SkelGen_661310064"
 class SkelGenDialog(QtWidgets.QDialog):
 	def __init__(self, parent=None):
 		super().__init__(parent)
 
 		self.setWindowTitle('Skeleton Generate')
-		self.resize(100,100)
+		self.resize(200,100)
 
 		self.mainLayout = QtWidgets.QVBoxLayout()
 		self.setLayout(self.mainLayout)
@@ -21,62 +25,30 @@ class SkelGenDialog(QtWidgets.QDialog):
 			'''
 		)
 
-
-		# self.buttonLayout = QtWidgets.QHBoxLayout()
-		# self.mainLayout.addLayout(self.buttonLayout)
-		# self.createGuidelineButton = QtWidgets.QPushButton('Create Guideline')
-		# #self.clearGuidelineButton.clicked.connect(onClickCreateGuideline)
-		# self.buttonLayout.addWidget(self.createGuidelineButton)					
-		# self.createGuidelineButton.setStyleSheet('''
-		# 	QPushButton{
-		# 		background-color: #977DFF;
-
-		# 	}
-		# 	QPushButton:hover {
-		# 		background-color: #FFCCF2;
-		# 	}
-		# 	QPushButton:pressed {
-		# 		background-color: #0600AB;
-		# 	}
-		# 	'''
-		# )
-
-		# self.buttonLayout = QtWidgets.QHBoxLayout()
-		# self.mainLayout.addLayout(self.buttonLayout)
-		# self.clearGuidelineButton = QtWidgets.QPushButton('Clear Guideline')
-		# self.buttonLayout.addWidget(self.clearGuidelineButton)
-		# self.clearGuidelineButton.setStyleSheet('''
-		# 	QPushButton{
-		# 		background-color: #977DFF;
-
-		# 	}
-		# 	QPushButton:hover {
-		# 		background-color: #FFCCF2;
-		# 	}
-		# 	QPushButton:pressed {
-		# 		background-color: #0600AB;
-		# 	}
-		# 	'''
-		# )
-
-		self.descriptionLabel = QtWidgets.QLabel('Before using Generate Joint')
-		self.mainLayout.addWidget(self.descriptionLabel)
-		# self.descriptionLabel.setStyleSheet("padding-top:15px;")
-
-		self.descriptionLabel = QtWidgets.QLabel('Make sure that you already adjust joint in the right position')
-		self.mainLayout.addWidget(self.descriptionLabel)
+		self.imageLabel = QtWidgets.QLabel()
+		self.imagePixmap = QtGui.QPixmap(f"{ROOT_RESOURCE_DIR}/image/skelgen_image.png")
+		self.imageLabel.setPixmap(self.imagePixmap)
+		scale_pixmap = self.imagePixmap.scaled(
+			QtCore.QSize(300,300),
+			QtCore.Qt.KeepAspectRatio,
+			QtCore.Qt.SmoothTransformation
+		)
+		self.imageLabel.setPixmap(scale_pixmap)
+		self.imageLabel.setAlignment(QtCore.Qt.AlignCenter)
+		self.mainLayout.addWidget(self.imageLabel)
 
 		self.buttonLayout = QtWidgets.QHBoxLayout()
 		self.mainLayout.addLayout(self.buttonLayout)
-		self.generateJointButton = QtWidgets.QPushButton('Generate Joint')
-		self.buttonLayout.addWidget(self.generateJointButton)
-		self.generateJointButton.setStyleSheet('''
+		self.importJointGuilelineButton = QtWidgets.QPushButton('Create Joint Guideline')
+		self.importJointGuilelineButton.clicked.connect(self.onClickCreateGuideline)
+		self.buttonLayout.addWidget(self.importJointGuilelineButton)
+		self.importJointGuilelineButton.setStyleSheet('''
 			QPushButton{
 				background-color: #977DFF;
 
 			}
 			QPushButton:hover {
-				background-color: #FFCCF2;
+				background-color: navy;
 			}
 			QPushButton:pressed {
 				background-color: #0600AB;
@@ -84,9 +56,26 @@ class SkelGenDialog(QtWidgets.QDialog):
 			'''
 		)
 
+		self.descriptionLabel = QtWidgets.QLabel('Before using Mirror Joint')
+		self.mainLayout.addWidget(self.descriptionLabel)
+		self.descriptionLabel.setStyleSheet('''
+			font-size: 13px;
+			color: white;
+			'''
+		)
+
+		self.descriptionLabel = QtWidgets.QLabel('Make sure that you already adjusted joint in the right position')
+		self.mainLayout.addWidget(self.descriptionLabel)
+		self.descriptionLabel.setStyleSheet('''
+			font-size: 13px;
+			color: white;
+			'''
+		)
+
 		self.buttonLayout = QtWidgets.QHBoxLayout()
 		self.mainLayout.addLayout(self.buttonLayout)
 		self.mirrorJointButton = QtWidgets.QPushButton('Mirror Joint')
+		self.mirrorJointButton.clicked.connect(self.onClickMirror)
 		self.buttonLayout.addWidget(self.mirrorJointButton)
 		self.mirrorJointButton.setStyleSheet('''
 			QPushButton{
@@ -94,23 +83,26 @@ class SkelGenDialog(QtWidgets.QDialog):
 
 			}
 			QPushButton:hover {
-				background-color: #FFCCF2;
+				background-color: navy;
 			}
 			QPushButton:pressed {
 				background-color: #0600AB;
 			}
 			'''
 		)
-		# self.buttonLayout = QtWidgets.QHBoxLayout()
-		# self.mainLayout.addLayout(self.buttonLayout)
-		# self.applyButton = QtWidgets.QPushButton('APPLY')
-		# self.cancelButton = QtWidgets.QPushButton('CANCEL')
-		# self.buttonLayout.addWidget(self.applyButton)
-		# self.buttonLayout.addWidget(self.cancelButton)
 
 		self.mainLayout.addStretch()
 
-	#def onClickCreateGuideline(self):
+	def onClickCreateGuideline(self):
+		if os.path.exists(FILE_PATH):
+			cmds.file(FILE_PATH, i=True)
+			print(f"Imported guideline from {FILE_PATH}")
+		else:
+			cmds.warning(f"File not found: {FILE_PATH}")
+
+	def onClickMirror(self):
+		util.MirrorSelection()
+
 
 def run():
 	global ui
