@@ -112,7 +112,7 @@ class SkelGenDialog(QtWidgets.QDialog):
 
 		self.buttonLayout = QtWidgets.QHBoxLayout()
 		self.mainLayout.addLayout(self.buttonLayout)
-		self.connectButton = QtWidgets.QPushButton('Mirror Joint')
+		self.connectButton = QtWidgets.QPushButton('Connect Curve Control and Joint')
 		self.connectButton.clicked.connect(self.onClickConnectJointAndCurveControl)
 		self.buttonLayout.addWidget(self.connectButton)
 		self.connectButton.setStyleSheet('''

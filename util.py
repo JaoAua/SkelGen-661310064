@@ -8,7 +8,7 @@ class MirrorSelection:
     def isExists(self):
         jointName = bool(self.jointName) and all(cmds.objExists(j) for j in self.jointName)
         curveControl = bool(self.curveControl) and all(cmds.objExists(j) for j in self.curveControl)
-        return jointName or cu
+        return jointName or curveControl
 
     def mirrorJoint(self):
         if not self.isExists():
@@ -23,21 +23,26 @@ class MirrorSelection:
         if not self.isExists():
             cmds.warning("Left Curve Control is not Exists.")
 
-        curveControls = ['L_eye_CC_grp', 'L_clavicle_CC_grp', 'L_hip_CC_grp']
+        curveControlGroups = ['L_eye_CC_grp', 'L_clavicle_CC_grp', 'L_hip_CC_grp']
 
-        for i in curveControls:
+        for i in curveControlGroups:
             translate = cmds.xform(i, query=True, translation=True, worldSpace=True)
 
-            new_NameCC = i.replace("L_","R_",1)
+            new_NameCC_grp = i.replace("L_","R_")
 
-            cmds.duplicate(i, name=new_NameCC)
+            cmds.duplicate(i, name=new_NameCC_grp)
 
             x, y, z = translate
-            cmds.xform(new_NameCC, t=[-x, y, z], worldSpace=True)
+            cmds.xform(new_NameCC_grp, t=[-x, y, z], worldSpace=True)
+
+        cmds.setAttr ('R_clavicle_CC_grp.scaleX', -1)
 
 
-    # def connectJointAndCurveControl(self):
-    #   pass
+    def connectJointAndCurveControl(self):
+        cmds.parentConstraint('L_clavicle_CC', 'R_shoulder_jnt', maintainOffset=True)
+        cmds.parentConstraint('L_wrist_CC', 'R_wrist_jnt', maintainOffset=True)
+
+
 
 # class CurveControlCreate(MirrorSelection):
 #   def __init__(self, curveShape):
