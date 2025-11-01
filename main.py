@@ -75,9 +75,47 @@ class SkelGenDialog(QtWidgets.QDialog):
 		self.buttonLayout = QtWidgets.QHBoxLayout()
 		self.mainLayout.addLayout(self.buttonLayout)
 		self.mirrorJointButton = QtWidgets.QPushButton('Mirror Joint')
-		self.mirrorJointButton.clicked.connect(self.onClickMirror)
+		self.mirrorJointButton.clicked.connect(self.onClickMirrorJoint)
 		self.buttonLayout.addWidget(self.mirrorJointButton)
 		self.mirrorJointButton.setStyleSheet('''
+			QPushButton{
+				background-color: #977DFF;
+
+			}
+			QPushButton:hover {
+				background-color: navy;
+			}
+			QPushButton:pressed {
+				background-color: #0600AB;
+			}
+			'''
+		)		
+
+		self.buttonLayout = QtWidgets.QHBoxLayout()
+		self.mainLayout.addLayout(self.buttonLayout)
+		self.mirrorCCButton = QtWidgets.QPushButton('Mirror Curve Control')
+		self.mirrorCCButton.clicked.connect(self.onClickMirrorCC)
+		self.buttonLayout.addWidget(self.mirrorCCButton)
+		self.mirrorCCButton.setStyleSheet('''
+			QPushButton{
+				background-color: #977DFF;
+
+			}
+			QPushButton:hover {
+				background-color: navy;
+			}
+			QPushButton:pressed {
+				background-color: #0600AB;
+			}
+			'''
+		)		
+
+		self.buttonLayout = QtWidgets.QHBoxLayout()
+		self.mainLayout.addLayout(self.buttonLayout)
+		self.connectButton = QtWidgets.QPushButton('Mirror Joint')
+		self.connectButton.clicked.connect(self.onClickConnectJointAndCurveControl)
+		self.buttonLayout.addWidget(self.connectButton)
+		self.connectButton.setStyleSheet('''
 			QPushButton{
 				background-color: #977DFF;
 
@@ -100,11 +138,17 @@ class SkelGenDialog(QtWidgets.QDialog):
 		else:
 			cmds.warning(f"File not found: {FILE_PATH}")
 
-	def onClickMirror(self):
+	def onClickMirrorJoint(self):
 		mirror_tool = util.MirrorSelection()
-		mirror_tool.mirrorJoint()   # มิเรอร์ joint ทั้งหมดที่ขึ้นต้นด้วย L_
+		mirror_tool.mirrorJoint()
 
-		# mirror_tool.mirrorCurveControl() 
+	def onClickMirrorCC(self):
+		mirror_tool = util.MirrorSelection()
+		mirror_tool.mirrorCurveControl()
+
+	def onClickConnectJointAndCurveControl(self):
+		mirror_tool = util.MirrorSelection()
+		mirror_tool.connectJointAndCurveControl()
 
 
 def run():
