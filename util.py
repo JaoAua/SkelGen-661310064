@@ -38,7 +38,16 @@ class MirrorSelection:
 
         cmds.setAttr ('R_clavicle_CC_grp.scaleX', -1)
 
-        cmds.select( 'R_clavicle_CC_grp', visible=True )
+        select = ['R_clavicle_CC_grp', 'R_hip_CC_grp', 'R_eye_CC_grp']
+        cmds.select(select, visible=True )
+        # cmds.select( 'R_hip_CC_grp', visible=True )
+        # cmds.select( 'R_eye_CC_grp', visible=True )
+        
         mel.eval('searchReplaceNames "L_" "R_" "hierarchy";')
 
-        cmds.setAttr('R_eye_CCShape.overrideEnabled', 6)
+    def connectJointAndCurveControl(self):
+        cmds.parentConstraint('R_clavicle_CC', 'R_shoulder_jnt', maintainOffset=True)
+        cmds.parentConstraint('R_wrist_CC', 'R_wrist_jnt', maintainOffset=True)
+        cmds.parentConstraint('R_hip_CC', 'R_hip_jnt', maintainOffset=True)
+        cmds.parentConstraint('R_eye_CC', 'R_eyeball_jnt', maintainOffset=True)
+        
