@@ -1,6 +1,6 @@
 //Maya ASCII 2024 scene
 //Name: joint.ma
-//Last modified: Tue, Nov 04, 2025 03:09:43 AM
+//Last modified: Tue, Nov 04, 2025 03:47:56 AM
 //Codeset: 1252
 requires maya "2024";
 requires -nodeType "aiOptions" -nodeType "aiAOVDriver" -nodeType "aiAOVFilter" "mtoa" "5.3.1.1";
@@ -11,18 +11,18 @@ fileInfo "product" "Maya 2024";
 fileInfo "version" "2024";
 fileInfo "cutIdentifier" "202304191415-7fa20164c6";
 fileInfo "osv" "Windows 11 Home Single Language v2009 (Build: 26200)";
-fileInfo "UUID" "5DEF9F85-4A41-38CF-8EE5-3891946761B9";
+fileInfo "UUID" "4237F46D-4996-1304-1FC4-D698006D2775";
 fileInfo "license" "education";
 createNode transform -s -n "persp";
 	rename -uid "4C34DE4C-45A0-6C09-0BEC-18A05F58DC30";
 	setAttr ".v" no;
-	setAttr ".t" -type "double3" 130.40791132272557 150.88272176945628 283.87552188735219 ;
-	setAttr ".r" -type "double3" -12.338352729630838 33.000000000001464 0 ;
+	setAttr ".t" -type "double3" -34.36952382600343 139.17391546748527 333.02432882308386 ;
+	setAttr ".r" -type "double3" -13.538352729631114 -7.3999999999984301 -1.0022710911234354e-16 ;
 createNode camera -s -n "perspShape" -p "persp";
 	rename -uid "56D02299-4C3D-0FFF-01B5-1886A501068C";
 	setAttr -k off ".v" no;
 	setAttr ".fl" 34.999999999999993;
-	setAttr ".coi" 321.05447450757435;
+	setAttr ".coi" 321.05447450756981;
 	setAttr ".imn" -type "string" "persp";
 	setAttr ".den" -type "string" "persp_depth";
 	setAttr ".man" -type "string" "persp_mask";
@@ -161,7 +161,7 @@ createNode parentConstraint -n "neck_jnt_parentConstraint1" -p "neck_jnt";
 	setAttr ".tg[0].tot" -type "double3" -6.2479327328849433e-16 8.4599018068676202e-10 
 		-4.3712454100841569e-07 ;
 	setAttr ".tg[0].tor" -type "double3" 90.000000000000199 82.7919032554734 -89.999999999999815 ;
-	setAttr ".lr" -type "double3" 180 -6.361109362927032e-15 7.1562480332929119e-15 ;
+	setAttr ".lr" -type "double3" 180.00000000000003 -1.4345195468663009e-30 7.9513867036587888e-15 ;
 	setAttr ".rst" -type "double3" 11.84611910725323 -3.5527136788005009e-15 -2.8990797917734042e-08 ;
 	setAttr ".rsrr" -type "double3" 180 4.9656445853064264e-31 7.9513867036587888e-15 ;
 	setAttr -k on ".w0";
@@ -696,7 +696,7 @@ createNode nurbsCurve -n "L_eye_CCShape" -p "L_eye_CC";
 	rename -uid "B664B07B-44BE-1785-3AA8-DC9E777A987D";
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
-	setAttr ".ovc" 6;
+	setAttr ".ovc" 13;
 	setAttr ".tw" yes;
 createNode transform -n "L_clavicle_CC_grp" -p "back3_CC_grp";
 	rename -uid "BE32FBFB-4678-FA37-232F-34A69C09E928";
@@ -707,7 +707,7 @@ createNode nurbsCurve -n "L_clavicle_CCShape" -p "L_clavicle_CC";
 	rename -uid "C6A1A136-4A28-416D-6B38-A787F23FDD63";
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
-	setAttr ".ovc" 6;
+	setAttr ".ovc" 13;
 	setAttr ".tw" yes;
 createNode transform -n "L_wrist_CC_grp" -p "L_clavicle_CC";
 	rename -uid "CA8DE5AA-4236-A786-5051-7E8C5DC2A936";
@@ -745,7 +745,7 @@ createNode nurbsCurve -n "L_hand_CCShape" -p "L_hand_CC";
 	rename -uid "3839A135-4F2A-C9A0-CCC3-1585B0035CA6";
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
-	setAttr ".ovc" 6;
+	setAttr ".ovc" 13;
 	setAttr ".cc" -type "nurbsCurve" 
 		3 8 2 no 3
 		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
@@ -797,7 +797,7 @@ createNode nurbsCurve -n "L_hip_CCShape" -p "L_hip_CC";
 	rename -uid "317D1750-477A-9848-8CDF-B4A5459815BE";
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
-	setAttr ".ovc" 6;
+	setAttr ".ovc" 13;
 	setAttr ".cc" -type "nurbsCurve" 
 		3 8 2 no 3
 		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
@@ -824,7 +824,7 @@ createNode nurbsCurve -n "L_foot_CCShape" -p "L_foot_CC";
 	rename -uid "5EE219E6-4A0C-0A3C-145A-ACBC4E257188";
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
-	setAttr ".ovc" 6;
+	setAttr ".ovc" 13;
 	setAttr ".cc" -type "nurbsCurve" 
 		3 8 2 no 3
 		13 -2 -1 0 1 2 3 4 5 6 7 8 9 10
@@ -842,20 +842,20 @@ createNode nurbsCurve -n "L_foot_CCShape" -p "L_foot_CC";
 		-0.52268549687211474 4.7982373409884719e-17 -0.6907226970492446
 		;
 createNode lightLinker -s -n "lightLinker1";
-	rename -uid "27278795-43A2-2A31-A485-BD8D00DA5C35";
+	rename -uid "12B84CE5-4A6C-3EB8-80E1-F08A5FE874FE";
 	setAttr -s 2 ".lnk";
 	setAttr -s 2 ".slnk";
 createNode shapeEditorManager -n "shapeEditorManager";
-	rename -uid "FE80273F-400A-033C-4175-B8B2583961A4";
+	rename -uid "EB690183-4D24-22D9-7CB9-2B852935F5BA";
 createNode poseInterpolatorManager -n "poseInterpolatorManager";
-	rename -uid "E6090500-41D4-FB38-93BF-40A4143A7512";
+	rename -uid "488AAC96-486F-F8DE-3F0C-908E8DD87C0C";
 createNode displayLayerManager -n "layerManager";
-	rename -uid "BED33D73-4B4F-C6AF-7634-5389AD7A7D76";
+	rename -uid "1312B40B-4923-DD2B-71EC-B180A8F3AAB5";
 createNode displayLayer -n "defaultLayer";
 	rename -uid "C5747804-46BF-6608-2ABC-57AAA209AC9E";
 	setAttr ".ufem" -type "stringArray" 0  ;
 createNode renderLayerManager -n "renderLayerManager";
-	rename -uid "8ECE0183-4038-D036-075B-598E91FA546A";
+	rename -uid "B0EA554C-4303-9653-D990-97AB96AE4036";
 createNode renderLayer -n "defaultRenderLayer";
 	rename -uid "B5828F9E-4413-4996-6164-C6B99F239ABF";
 	setAttr ".g" yes;
