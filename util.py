@@ -1,4 +1,5 @@
 import maya.cmds as cmds
+import maya.mel as mel 
 
 class MirrorSelection:
     def __init__(self):
@@ -37,18 +38,10 @@ class MirrorSelection:
 
         cmds.setAttr ('R_clavicle_CC_grp.scaleX', -1)
 
+        cmds.select( 'R_clavicle_CC_grp', visible=True )
+        mel.eval('searchReplaceNames "L_" "R_" "hierarchy";')
+
 
     def connectJointAndCurveControl(self):
-        cmds.parentConstraint('L_clavicle_CC', 'R_shoulder_jnt', maintainOffset=True)
-        cmds.parentConstraint('L_wrist_CC', 'R_wrist_jnt', maintainOffset=True)
-
-
-
-# class CurveControlCreate(MirrorSelection):
-#   def __init__(self, curveShape):
-#       self.curveShape = curveShape
-
-#       self.curveCmds = {'mainCC' : 'curve -d 1 -p -2 0 -1 -p -2 0 -5 -p -4 0 -5 -p 0 0 -9 -p 4 0 -5 -p 2 0 -5 -p 2 0 -1 -p 6 0 -1 -p 6 0 -3 -p 11 0 1 -p 6 0 5 -p 6 0 3 -p 2 0 3 -p 2 0 7 -p 4 0 7 -p 0 0 11 -p -4 0 7 -p -2 0 7 -p -2 0 3 -p -6 0 3 -p -6 0 5 -p -10 0 1 -p -6 0 -3 -p -6 0 -1 -k 0 -k 1 -k 2 -k 3 -k 4 -k 5 -k 6 -k 7 -k 8 -k 9 -k 10 -k 11 -k 12 -k 13 -k 14 -k 15 -k 16 -k 17 -k 18 -k 19 -k 20 -k 21 -k 22 -k 23'}
-
-#       if self.curveCmds.get(self.curveShape):
-#           cmds.eval(self.curveCmds[self.curveShape])
+        cmds.parentConstraint('R_clavicle_CC', 'R_shoulder_jnt', maintainOffset=True)
+        cmds.parentConstraint('R_wrist_CC', 'R_wrist_jnt', maintainOffset=True)

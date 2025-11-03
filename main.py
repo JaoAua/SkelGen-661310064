@@ -2,6 +2,7 @@ from PySide2 import QtCore, QtGui, QtWidgets
 from shiboken2 import wrapInstance
 import maya.OpenMayaUI as omui
 import os
+import maya.cmds as cmds
 from . import util
 import importlib
 importlib.reload(util)
